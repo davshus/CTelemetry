@@ -1,0 +1,15 @@
+{
+  "name": "opencv-server",
+  "version": "1.0.0",
+  "description": "A server to transfer OpenCV images over HTTP requests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/davshus/OpenCV-Server"
+  },
+  "author": "David Shustin",
+  "license": "UNLICENSED"
+}
