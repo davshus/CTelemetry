@@ -11,5 +11,9 @@
     "url": "https://www.github.com/davshus/OpenCV-Server"
   },
   "author": "David Shustin",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.16.2",
+    "opencv": "^6.0.0"
+  }
 }
