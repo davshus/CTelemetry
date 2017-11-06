@@ -9,6 +9,8 @@ var app = express();
 var windows = {};
 
 app.use(bodyParser.raw({
+  type: 'image/jpeg',
+  inflate: true,
   limit: '100mb'
 }));
 
