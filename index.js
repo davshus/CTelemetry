@@ -22,7 +22,7 @@ function showPic(win, buf) {
   });
 }
 
-app.post('/', (req, res) => {
+app.post('/display', (req, res) => {
   var windowName = req.get('window-name');
   if (!(windowName in windows)) {
     windows[windowName] = new cv.NamedWindow(windowName, 0);
