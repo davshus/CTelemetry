@@ -1,10 +1,13 @@
 /* jshint node: true */
 'use strict';
 
-var cv = require('opencv');
+// var cv = require('opencv');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var path = require('path');
 
 var windows = {};
 
@@ -14,21 +17,27 @@ app.use(bodyParser.raw({
   limit: '100mb'
 }));
 
-function showPic(win, buf) {
-  cv.readImage(buf, function (err, im) {
-    if (err) throw err;
-    win.show(im);
-    win.blockingWaitKey(10, 10);
-  });
+function showPic(windowName, buf) {
+  // cv.readImage(buf, function (err, im) {
+    // if (err) throw err;
+    // win.show(im);
+    // win.blockingWaitKey(30, 30);
+    io.emit('update', {
+      title: windowName,
+      data: buf.toString('base64')
+    });
+  // });
 }
 
-app.post('/display', (req, res) => {
+app.post('/display/submit', (req, res) => {
   var windowName = req.get('window-name');
-  if (!(windowName in windows)) {
-    windows[windowName] = new cv.NamedWindow(windowName, 0);
-  }
-  showPic(windows[windowName], req.body);
+  // if (!(windowName in windows)) {
+  //   windows[windowName] = new cv.NamedWindow(windowName, 0);
+  // }
+  showPic(windowName, req.body);
   res.sendStatus(200);
 });
 
-app.listen(8080, () => console.log('Listening on port 8080!'));
+app.use('/display/viewer', express.static(path.join(__dirname, 'web', 'displayviewer')));
+
+http.listen(8080, () => console.log('Listening on port 8080!'));
