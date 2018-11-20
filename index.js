@@ -40,4 +40,4 @@ app.post('/display/submit', (req, res) => {
 
 app.use('/display/viewer', express.static(path.join(__dirname, 'web', 'displayviewer')));
 
-http.listen(8080, () => console.log('Listening on port 8080!'));
+http.listen(3000, () => console.log('Listening on port 3000!'));
