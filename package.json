@@ -1,5 +1,5 @@
 {
-  "name": "opencv-server",
+  "name": "ctelemetry",
   "version": "1.0.0",
   "description": "A server to transfer OpenCV images over HTTP requests",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://www.github.com/davshus/OpenCV-Server"
+    "url": "https://www.github.com/davshus/CTelemetry"
   },
   "author": "David Shustin",
   "license": "UNLICENSED",

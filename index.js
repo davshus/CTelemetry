@@ -11,11 +11,9 @@ var path = require('path');
 
 var windows = {};
 
-app.use(bodyParser.raw({
-  type: 'image/jpeg',
-  inflate: true,
-  limit: '100mb'
-}));
+var values = {};
+
+// app.use();
 
 function showPic(windowName, buf) {
   // cv.readImage(buf, function (err, im) {
@@ -28,8 +26,14 @@ function showPic(windowName, buf) {
     });
   // });
 }
-
-app.post('/display/submit', (req, res) => {
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.post('/display/submit', bodyParser.raw({
+    type: 'image/jpeg',
+    inflate: true,
+    limit: '100mb'
+}), (req, res) => {
   var windowName = req.get('window-name');
   // if (!(windowName in windows)) {
   //   windows[windowName] = new cv.NamedWindow(windowName, 0);
@@ -38,6 +42,18 @@ app.post('/display/submit', (req, res) => {
   res.sendStatus(200);
 });
 
+app.post('/values/submit', bodyParser.json(), (req, res) => {
+        values[req.body.key] = req.body.value;
+        console.log(req.body);
+        res.sendStatus(200);
+});
+
+app.get('/values', (req, res) => {
+    res.status(200).send(values[req.query.key]);
+    res.end();
+});
+
 app.use('/display/viewer', express.static(path.join(__dirname, 'web', 'displayviewer')));
+app.use('/values/viewer', express.static(path.join(__dirname, 'web', 'valuesviewer')));
 
 http.listen(3000, () => console.log('Listening on port 3000!'));
