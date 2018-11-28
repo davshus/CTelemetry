@@ -1,4 +1,7 @@
 function sendValue() {
+    if (this.type == 'number' && this.value == '') {
+        this.value = 0;
+    }
     jQuery.ajax({
         method: 'POST',
         url: '/values/submit',

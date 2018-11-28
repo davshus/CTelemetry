@@ -49,6 +49,7 @@ app.post('/values/submit', bodyParser.json(), (req, res) => {
 });
 
 app.get('/values', (req, res) => {
+    console.log('Request: ' + req.query.key, 'Response: ' + values[req.query.key]);
     res.status(200).send(values[req.query.key]);
     res.end();
 });
