@@ -38,6 +38,7 @@ app.post('/display/submit', bodyParser.raw({
   // if (!(windowName in windows)) {
   //   windows[windowName] = new cv.NamedWindow(windowName, 0);
   // }
+  console.log('[' + new Date().toISOString() + '] Received image to ' + windowName);
   showPic(windowName, req.body);
   res.sendStatus(200);
 });
